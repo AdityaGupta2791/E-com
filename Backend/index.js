@@ -22,7 +22,23 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = (process.env.CORS_ORIGINS || '')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, cb) => {
+      // allow non-browser requests or same-origin
+      if (!origin) return cb(null, true);
+      if (allowedOrigins.length === 0) return cb(null, true);
+      if (allowedOrigins.includes(origin)) return cb(null, true);
+      return cb(new Error('Not allowed by CORS'));
+    },
+  })
+);
 
 connectDB();
 
