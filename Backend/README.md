@@ -19,6 +19,10 @@ PORT=4000
 MONGO_URI=your_mongo_connection
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES=7d
+# Cloudinary (set these in your deployment environment)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 ## Run

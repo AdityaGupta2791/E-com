@@ -104,6 +104,8 @@ const EditProduct = () => {
 
         const uploadRes = await api.post("/products/upload", formData)
         image_url = uploadRes?.data?.image_url
+        const image_public_id = uploadRes?.data?.image_public_id
+        productDetails.image_public_id = image_public_id
       }
 
       const payload = {

@@ -82,11 +82,12 @@ const AddProduct = () => {
 
       const uploadRes = await api.post("/products/upload", formData)
       const image_url = uploadRes?.data?.image_url
+      const image_public_id = uploadRes?.data?.image_public_id
 
       if (!image_url) throw new Error("Image upload failed")
 
-      // send product data
-      const payload = { ...productDetails, image: image_url }
+      // send product data (include Cloudinary public id for future deletion)
+      const payload = { ...productDetails, image: image_url, image_public_id }
 
       const res = await api.post("/products/addproduct", payload)
 

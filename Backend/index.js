@@ -6,7 +6,15 @@ const connectDB = require('./config/db');
 const mainRouter = require('./routes/index.js');  
 
 // Validate env
-const requiredEnv = ['MONGO_URI', 'PORT', 'JWT_SECRET', 'JWT_EXPIRES'];
+const requiredEnv = [
+  'MONGO_URI',
+  'PORT',
+  'JWT_SECRET',
+  'JWT_EXPIRES',
+  'CLOUDINARY_CLOUD_NAME',
+  'CLOUDINARY_API_KEY',
+  'CLOUDINARY_API_SECRET'
+];
 const missing = requiredEnv.filter((k) => !process.env[k]);
 if (missing.length) {
   console.error(`Missing required environment variables: ${missing.join(', ')}`);
@@ -41,9 +49,6 @@ app.use(
 );
 
 connectDB();
-
-// Static images
-app.use('/images', express.static(path.join(__dirname, 'upload', 'images')));
 
 // Mount ALL API routes 
 app.use('/api/v1', mainRouter);

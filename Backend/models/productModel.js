@@ -9,6 +9,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // Cloudinary public id for the uploaded image (used for deletion)
+  image_public_id: {
+    type: String
+  },
   description: {
     type: String,
     default: ""
